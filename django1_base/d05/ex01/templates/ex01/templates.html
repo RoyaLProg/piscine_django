@@ -1,0 +1,32 @@
+{% extends 'ex01/base.html' %}
+{% load static %}
+
+{% block title %} Ex01: Template Engine. {% endblock %}
+{% block content %}
+
+{% block style %} <link rel="stylesheet" href="{% static 'ex01/style2.css' %}" > {% endblock %}
+<div>
+	<pre>
+		Django’s default template engine is a powerful and secure text-based template system used to separate business logic (Python code) from presentation logic (HTML).
+		It allows developers to create dynamic web pages by rendering templates with variables and control structures.
+		1. Blocks ({{'{'}}% block %{{'}'}})
+			Purpose:
+				Used with template inheritance to define sections that child templates can override.
+		2. Loops ({{'{'}}% for ... in ... %{{'}'}})
+			Purpose:
+				Iterates over lists, querysets, or other iterable objects passed in the context.
+			you can also use:
+				{{'{'}}{{'{'}} forloop.counter {{'}'}}{{'}'}} – 1-based index
+				{{'{'}}{{'{'}} forloop.last {{'}'}}{{'}'}} – True if last iteration
+		3. If Statements ({{'{'}}% if ... %{{'}'}})
+			Purpose:
+				Control logic for conditional display of content.
+			Also supports:
+				{{'{'}}% elif %{{'}'}}
+				{{'{'}}% endif %{{'}'}}
+		4. Display of Passed Context Variables
+			Purpose:
+				Show dynamic data sent from the view to the template.
+	</pre>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'ex01/base.html' %}
+
+{% block title %} Ex01: Display process of a static page. {% endblock %}
+{% block content %}
+<div>
+	<pre>
+		1. Client Sends a Request
+			A user enters a URL (e.g., http://example.com/about) in their browser.
+			The browser sends an HTTP GET request to the server.
+		2. URL Routing
+			The server receives the request and uses a URL router (urls.py) to match the URL path to a view function.
+		3. View Function Called
+			The matched view function is executed. Its job is to handle the logic and return a response.
+			Inside the view, a template rendering function (render()) is called.
+			The framework loads the HTML template (about.html) from the template directory.
+			Since it’s a static page, no dynamic context or data is injected — just pure HTML.
+		5. HTTP Response Created
+			The rendered HTML is wrapped in an HTTP response object.
+			The response is returned to the client.
+		6. Browser Displays the Page
+			The client’s browser receives the response.
+			It parses and displays the static HTML content to the user.
+	</pre>
+</div>
+{% endblock %}
