@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<form action="/ex02/" method="POST">
+			{% csrf_token %}
+			{{ form }}
+			<input type="submit" value="Submit">
+		</form>
+		<div style="margin-top: 20px">
+			{% for h in history %}
+			<div style="border-bottom: 2px solid black">
+				<h3>{{h.time}}</h3>
+				<p>{{h.text}}</p>
+			<div>
+			{% endfor %}
+		</div>
+	</body>
+</html>
