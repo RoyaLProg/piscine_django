@@ -4,6 +4,7 @@ import sys
 
 USAGE = f"USAGE: python3 {sys.argv[0]} WIKIPEDIA_URL"
 START_PATTERN = "https://en.wikipedia.org/wiki/"
+HEADERS = {'User-Agent': 'Mozila/5.0 (Linux; Android 14; SM-S928W) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.230 Mobile Safari/537.36'}
 
 
 def test_link(link: str):
@@ -32,7 +33,7 @@ def get_next(url: str):
     #         || or not between in bracket
     # ))
 
-    req = requests.get(url)
+    req = requests.get(url, headers=HEADERS)
     if not req.ok:
         print("request returned a non ok response, terminating")
         exit(1)
@@ -71,6 +72,7 @@ def loop(url: str, prevs: list = []):
     current = url.split('/')
     current = current[len(current) - 1]
     if url == START_PATTERN + "Philosophy":
+        prevs.append(current)
         for road in prevs:
             print(road)
         print(f"{len(prevs)} roads from {prevs[0]} to philosophy !")

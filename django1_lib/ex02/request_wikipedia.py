@@ -4,6 +4,7 @@ import sys
 
 API_URL = "https://en.wikipedia.org/w/api.php"
 USAGE = f"Usage : {sys.argv[0]} \"query\""
+HEADERS = {'User-Agent': 'Mozila/5.0 (Linux; Android 14; SM-S928W) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.230 Mobile Safari/537.36'}
 
 
 def write_to_file(pageTitle: str, content: str):
@@ -17,7 +18,7 @@ def write_to_file(pageTitle: str, content: str):
 
 def get_page(pageTitle: str):
     res = requests.api.get("https://en.wikipedia.org/w/index.php",
-                           [("title", pageTitle), ("action", "raw")])
+                           [("title", pageTitle), ("action", "raw")], headers=HEADERS)
 
     if not res.ok:
         print("page does not exist")
@@ -28,9 +29,11 @@ def get_page(pageTitle: str):
 
 
 def search(string: str):
-    res = requests.api.get(API_URL, [("action", "query"), ("list", "search"),
-                                     ("srsearch", string), ("format", "json")])
+    res = requests.api.post(API_URL, [("action", "query"), ("list", "search"),
+                                      ("srsearch", string), ("format", "json")], headers=HEADERS)
     if not res.ok:
+        print(res.request.body)
+        print(res)
         print("request failed")
         return
 
