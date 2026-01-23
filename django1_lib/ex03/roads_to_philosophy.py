@@ -42,11 +42,19 @@ def get_next(url: str):
 
     if len(soup.find_all('p')) < 2:
         return
-    links_0 = soup.find_all('p')[0].find_all('a')
-    links_1 = soup.find_all('p')[1].find_all('a')
-    links = links_0 + links_1
-    new_url = ""
 
+    ps = soup.find_all('p')
+    links = list()
+    for p in ps:
+        links.append(p.find_all('a'))
+    flat_list = []
+
+    for ps in links:
+        for p in ps:
+            flat_list.append(p)
+
+    links = flat_list
+    new_url = ""
     for link in links:
         if test_link(link['href']):
             new_url = 'https://en.wikipedia.org' + link['href']
@@ -67,7 +75,7 @@ def loop(url: str, prevs: list = []):
     if len(prevs) != 0:
         if not url.startswith(START_PATTERN):
             print(f"invalid url : {url}")
-            return
+            exit(0)
 
     current = url.split('/')
     current = current[len(current) - 1]
